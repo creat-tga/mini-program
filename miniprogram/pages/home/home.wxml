@@ -1,0 +1,113 @@
+<!--pages/home/home.wxml.wxml-->
+
+<t-navbar
+  style="--td-navbar-background: transparent;backdrop-filter: blur(10rpx);-webkit-backdrop-filter: blur(10rpx); font-size: larger; font-weight: 600;"
+  title="高效机房" />
+<image src="bg.png" class="bg-image" mode="aspectFill" />
+<t-back-top style="bottom: 180rpx; right: 32rpx; z-index: 10; opacity: 0.5;" theme="{{backTopTheme}}"
+  text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop">
+</t-back-top>
+<view class="page-container">
+  <view class="search">
+    <t-search shape="round" value="{{searchValue}}" placeholder="请输入工程信息" clearable bind:change="onSearchChange"
+      bind:confirm="onSearchConfirm" bind:clear="onSearchClear" class="left-align-search" />
+  </view>
+
+  <view class="sort">
+    <view data-key="name" bind:tap="onSortChange"
+      class="sort-item {{sortKey === 'name' && sortOrder !== '' ? 'active' : 'inactive'}}">
+      <text>名称</text>
+      <view class="sort-icon">
+        <t-icon name="caret-up-small" size="30rpx"
+          class="icon {{sortKey === 'name' && sortOrder === 'asc' ? 'active' : 'inactive'}}" />
+        <t-icon name="caret-down-small" size="30rpx"
+          class="icon {{sortKey === 'name' && sortOrder === 'desc' ? 'active' : 'inactive'}}" />
+      </view>
+    </view>
+    <view data-key="location" bind:tap="onSortChange"
+      class="sort-item {{sortKey === 'location' && sortOrder !== '' ? 'active' : 'inactive'}}">
+      <text>地点</text>
+      <view class="sort-icon">
+        <t-icon name="caret-up-small" size="30rpx"
+          class="icon {{sortKey === 'location' && sortOrder === 'asc' ? 'active' : 'inactive'}}" />
+        <t-icon name="caret-down-small" size="30rpx"
+          class="icon {{sortKey === 'location' && sortOrder === 'desc' ? 'active' : 'inactive'}}" />
+      </view>
+    </view>
+    <view data-key="coolingCapacity" bind:tap="onSortChange"
+      class="sort-item {{sortKey === 'coolingCapacity' && sortOrder !== '' ? 'active' : 'inactive'}}">
+      <text>冷量</text>
+      <view class="sort-icon">
+        <t-icon name="caret-up-small" size="30rpx"
+          class="icon {{sortKey === 'coolingCapacity' && sortOrder === 'asc' ? 'active' : 'inactive'}}" />
+        <t-icon name="caret-down-small" size="30rpx"
+          class="icon {{sortKey === 'coolingCapacity' && sortOrder === 'desc' ? 'active' : 'inactive'}}" />
+      </view>
+    </view>
+    <view data-key="COP" bind:tap="onSortChange"
+      class="sort-item {{sortKey === 'COP' && sortOrder !== '' ? 'active' : 'inactive'}}">
+      <text>能效</text>
+      <view class="sort-icon">
+        <t-icon name="caret-up-small" size="30rpx"
+          class="icon {{sortKey === 'COP' && sortOrder === 'asc' ? 'active' : 'inactive'}}" />
+        <t-icon name="caret-down-small" size="30rpx"
+          class="icon {{sortKey === 'COP' && sortOrder === 'desc' ? 'active' : 'inactive'}}" />
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y style="height: calc(100vh - 530rpx);" bindscroll="onScroll" scroll-top="{{backToTopScroll}}"
+    scroll-with-animation="true">
+    <view class="program-info" hover-class="card-active" wx:for="{{filteredList}}" wx:key="id" data-id="{{item.id}}">
+      <view class="info">
+        <view style="display: flex; flex-direction: row; height: 70%">
+          <view style="height: 100%; display:flex; flex-direction: column; width: 70%;">
+            <text style="flex: 2;" class="title">{{item.name}}</text>
+            <view style="flex: 4; display:flex; flex-direction: column; justify-content:center">
+              <view style="display:flex; flex-direction: row; align-items: center; margin: 5rpx;">
+                <t-icon style="flex: 1.5; color: rgba(100, 100, 100, 0.7); " name="location" />
+                <text style="flex: 1.6; color: rgba(100, 100, 100, 0.7); font-size: 25rpx;">地址：</text>
+                <text style="flex: 7" class="result">{{item.location}}</text>
+              </view>
+              <view style="display:flex; flex-direction: row; align-items: center; margin: 5rpx;">
+                <t-icon style="flex: 1.5; color: rgba(100, 100, 100, 0.7) " name="article" />
+                <text style="flex: 1.6; color: rgba(100, 100, 100, 0.7); font-size: 25rpx; ">类型：</text>
+                <text style="flex: 7" class="result">{{item.type}}</text>
+              </view>
+            </view>
+          </view>
+          <view style="height:100%; width: 30%; background-color: antiquewhite; position: relative;">
+            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
+              style="position: absolute;  top: 5rpx;  right: 20rpx; width: 40rpx;" bind:tap="onShowAction"
+              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}"></t-icon>
+          </view>
+        </view>
+
+        <t-divider style="border-color: rgb(219, 217, 217); height: 5%;" />
+        <view
+          style="display:flex; flex-direction: row; align-items: center; width: 100%; height: 25%; color: rgb(59, 59, 59); font-size: 25rpx;">
+          <text style="flex: 3" class="result">冷量 {{item.coolingCapacity}} RT</text>
+          <text style="flex: 4" class="result">能效 {{item.COP}} kWh/kWh</text>
+          <text style="flex: 3" class="result">回报期 {{item.investReturn}} 年</text>
+        </view>
+
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">加载中...</view>
+    <view class="no-data" wx:if="{{!loading && programList.length === 0}}">暂无节目</view>
+
+  </scroll-view>
+
+  <!-- <t-action-sheet bind:select="onActionSelect" visible="{{actionVisible}}" items="{{actionItems}}" cancel-text="取消"
+    t-class-description="action-desc" /> -->
+  <t-action-sheet id="t-action-sheet" usingCustomNavbar bind:selected="handleSelected" />
+
+
+  <t-tab-bar t-class="t-tab-bar" value="{{value}}" bindchange="onChange" theme="tag" split="{{false}}">
+    <t-tab-bar-item wx:for="{{list}}" wx:key="value" value="{{item.value}}" icon="{{item.icon}}">
+      {{item.label}}
+    </t-tab-bar-item>
+  </t-tab-bar>
+
+</view>

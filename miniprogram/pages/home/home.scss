@@ -1,0 +1,147 @@
+/* pages/home/home.wxss */
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* 放在最底层 */
+}
+
+.page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* 垂直排列 */
+  justify-content: flex-start;
+  /* 垂直方向从顶部开始 */
+  align-items: center;
+  /* 关键：水平居中所有子元素 */
+  box-sizing: border-box;
+  // padding-top: 100px;
+}
+
+.search {
+  width: 95%;
+  margin-top: 20rpx;
+}
+
+.sort {
+  width: 90%;
+  color: rgb(124, 124, 124);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+}
+
+.sort-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.sort-item .sort-icon {
+  display: flex;
+  flex-direction: column;
+}
+.sort-item.active text{
+  color: rgb(53, 130, 253);
+}
+.sort-item .sort.active {
+  display: flex;
+  flex-direction: row;
+  color: rgb(53, 130, 253);
+}
+
+.sort.inactivate {
+  display: flex;
+  flex-direction: row;
+  color: rgb(124, 124, 124);
+}
+
+.t-icon-caret-up-small.t-icon-base {
+  height: 15rpx;
+  // color: rgb(124, 124, 124);
+}
+
+.t-icon-caret-down-small.t-icon-base {
+  height: 15rpx;
+  // color: rgb(124, 124, 124);
+}
+
+.icon.active {
+  color: rgb(53, 130, 253);
+}
+
+.icon.inactivate {
+  color: rgb(124, 124, 124);
+}
+
+
+.program-info {
+  width: 95%;
+  height: 150px;
+  margin: 0 auto 20rpx auto;
+  /* 关键：上下外边距 + 左右 auto，实现水平居中 */
+  border-radius: 20rpx;
+  background-color: rgba(246, 246, 248, 0.884);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
+}
+
+.program-info .cover {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.program-info .info {
+  height: 100%;
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-active {
+  background: rgba(246, 246, 248, 0.8) !important;
+  /* 背景变暗 */
+  // transform: scale(0.98);                          /* 轻微缩放，更有反馈感 */
+  // box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.2);         /* 阴影加深 */
+  transition: all 0.2s ease;
+  /* 平滑过渡 */
+  opacity: 0.9;
+  /* 轻微透明 */
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: rgb(56, 112, 209);
+}
+
+.result {
+  font-size: 25rpx;
+  color: rgba(50, 50, 50, 1);
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #666;
+  lines: 2;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  padding: 40rpx;
+  color: #999;
+}
