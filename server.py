@@ -26,7 +26,7 @@ for i in range(20):
         "COP": random.randint(200, 5000) / 100,
         "investReturn": random.randint(600, 1000) / 10
     })
-program[1]["name"] = "广州办公楼项目"
+program[1]["name"] = "广州办公楼项目123456789123456789"
 program[1]["location"] = "广东省广州市"
 program[2]["name"] = "珠海办公楼项目"
 program[2]["location"] = "广东省珠海市"
@@ -54,4 +54,4 @@ async def programs_delete(requestDate: dict):
     return {"code": 200, "data": program}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host=["0.0.0.0", "::"], port=8000)
