@@ -329,4 +329,34 @@ Page({
       }
     });
   },
+
+  // 点击新建工程按钮
+  onCreateNewProject() {
+    wx.navigateTo({
+      url: '/pages/newProject/newProject', 
+      success: () => {
+        console.log('跳转到新建工程页面成功');
+      },
+      fail: (err) => {
+        console.error('跳转失败', err);
+        wx.showToast({
+          title: '页面不存在',
+          icon: 'none'
+        });
+      }
+    });
+    // wx.switchTab({
+    //   url: '/pages/newProject/newProject', 
+    //   success: () => {
+    //     console.log('跳转到新建工程页面成功');
+    //   },
+    //   fail: (err) => {
+    //     console.error('跳转失败', err);
+    //     wx.showToast({
+    //       title: '页面不存在',
+    //       icon: 'none'
+    //     });
+    //   }
+    // });
+  },
 })

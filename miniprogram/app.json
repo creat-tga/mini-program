@@ -1,9 +1,12 @@
 {
   "pages": [
+    "pages/newProject/newProject",
     "pages/home/home",
     "pages/index/index",
     "pages/logs/logs"
+
   ],
+
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
@@ -29,6 +32,6 @@
     "t-divider": "tdesign-miniprogram/divider/divider",
     "t-back-top": "tdesign-miniprogram/back-top/back-top",
     "t-search": "tdesign-miniprogram/search/search",
-    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet" 
+    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
   }
 }

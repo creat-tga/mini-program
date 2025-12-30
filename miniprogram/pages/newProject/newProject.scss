@@ -1,0 +1,76 @@
+/* pages/newProject/newProject.wxss */
+
+.page {
+  height: 100vh;
+  /* 关键：页面占满视口高度 */
+  display: flex;
+  flex-direction: column;
+}
+
+.t-navbar {
+  --td-navbar-background: transparent;
+  backdrop-filter: blur(10rpx);
+  -webkit-backdrop-filter: blur(10rpx);
+  font-size: larger;
+  font-weight: 600;
+}
+
+.project-info {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(243, 243, 243, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 横向（水平）居中 */
+}
+
+
+/* 自定义 t-input：让它高度、字体、对齐与 t-cell 一致 */
+.custom-input {
+  /* TDesign 默认 t-input 高度约 96rpx，t-cell 是 108rpx，统一成 108rpx */
+  height: 108rpx !important;
+  padding: 0 32rpx !important;
+  /* 与 t-cell 内边距对齐 */
+  border-bottom: 1rpx solid #eee;
+  /* 可选：加分割线与 cell 一致 */
+}
+
+.custom-input{
+  background-color: rgba(0, 0, 0, 0);
+}
+.custom-input .asd{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.custom-input .input {
+  background-color: rgba($color: #3b282800, $alpha:0);
+}
+
+.custom-cell .center {
+  width: 4rem;
+  min-width: 2em;
+  max-width: 5em;
+  margin-right: 0;
+}
+.custom-cell .tittle {
+  // font-weight: 900;
+  width: 4rem;
+  min-width: 2em;
+  max-width: 5em;
+  margin-right: var(--td-spacer-2, 32rpx);
+  // border: #000 solid 1px;
+}
+
+.custom-cell .note {
+  justify-content: left;
+  font-size: 16px;
+  // font-weight: 900;
+  // width: 4rem;
+  // min-width: 2em;
+  // max-width: 5em;
+  // margin-right: var(--td-spacer-2, 32rpx);
+  // border: #000 solid 1px;
+}
+
