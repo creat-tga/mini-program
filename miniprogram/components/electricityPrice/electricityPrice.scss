@@ -1,0 +1,47 @@
+/* components/electricityPrice/electricityPrice.wxss */
+
+.custom-cell .center {
+  width: 4rem;
+  min-width: 2em;
+  max-width: 5em;
+  margin-right: 0;
+}
+
+.custom-cell .tittle {
+  width: 4rem;
+  min-width: 2em;
+  max-width: 5em;
+  margin-right: 0;
+}
+
+.custom-cell .note {
+  justify-content: left;
+  width: auto;
+  // min-width: 2em;
+  // max-width: 5em;
+  margin-right: 0;
+}
+
+.my-note .t-radio--block {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  width: auto;
+}
+
+.custom-radio-item{
+  display: flex !important;
+  flex-direction: row !important;
+  padding: 0 !important;
+}
+.t-radio__content{
+  display: flex !important;
+  flex-direction: row !important;
+}
+.label{
+  width: 0;
+}
+
+
+
+

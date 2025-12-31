@@ -32,6 +32,8 @@
     "t-divider": "tdesign-miniprogram/divider/divider",
     "t-back-top": "tdesign-miniprogram/back-top/back-top",
     "t-search": "tdesign-miniprogram/search/search",
-    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
+    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet",
+    "eletricity-price": "components/electricityPrice/electricityPrice",
+    "t-input": "tdesign-miniprogram/input/input"
   }
 }

@@ -1,0 +1,38 @@
+<!--components/electricityPrice/electricityPrice.wxml-->
+<t-cell class="custom-cell" title="工程类型" hover t-class-title="tittle" t-class-center="center" t-class-note="note"
+  data-key="projectType" bind:click="onTitlePicker">
+  <view slot="note" class="my-note">
+    <t-radio-group hover default-value="0" borderless class="electricity-select">
+      <t-radio value="0" t-class="custom-radio-item" t-class-label="label"
+        style="font-size:30rpx; --td-radio-icon-checked-color:rgba(53,130,255,1); --td-radio-icon-size:1.2rem;"
+        allow-uncheck icon="dot">
+
+        <view slot="content" style="display: flex; flex-direction: row; width: auto;">
+          <t-cell title="电价库" arrow hover note="{{electricityPrice}}" bind:click="onElectricityPricePicker" />
+        </view>
+      </t-radio>
+      <t-radio value="1" t-class="custom-radio-item" t-class-label="label"
+        style="font-size:30rpx; --td-radio-icon-checked-color:rgba(53,130,255,1); --td-radio-icon-size:1.2rem;"
+        allow-uncheck icon="dot">
+
+        <view slot="content">
+          <t-input t-class-title="tittle" class="custom-input" label="自定义" placeholder="请输入设计负荷" suffix="元/kW"
+            maxlength="{{30}}" type="number" format="{{priceFormat}}" bindchange="onPriceInput" t-class-input="input"
+            t-class-label="label" />
+        </view>
+      </t-radio>
+    </t-radio-group>
+
+
+    <text class="required">*</text> <!-- 例如加个必填星号 -->
+    <text>请选择工程类型（可多选）</text>
+    <t-icon name="error-circle" size="32" class="warning-icon" />
+  </view>
+
+</t-cell>
+
+<t-picker visible="{{visible}}" value="{{selected}}" data-key="projectType"
+  title="请选择电价库" cancelBtn="取消" confirmBtn="确认" usingCustomNavbar bindchange="onPickerChange"
+  bindpick="onColumnChange" bindcancel="onPickerCancel">
+  <t-picker-item options="{{options}}"></t-picker-item>
+</t-picker>

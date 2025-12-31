@@ -7,11 +7,14 @@
       <t-input class="custom-class" label="工程名称" placeholder="请输入工程名称" maxlength="{{30}}" />
       <t-cell class="custom-cell" title="工程类型" arrow hover note="请选择工程类型" t-class-title="tittle" t-class-center="center"
         t-class-note="note" data-key="projectType" bind:click="onTitlePicker" />
-      <t-input class="custom-input" label="设计负荷" placeholder="请输入设计负荷" suffix="kW" maxlength="{{30}}" type="number"
+      <!-- <t-input class="custom-input" label="设计负荷" placeholder="请输入设计负荷" suffix="kW" maxlength="{{30}}" type="number"
         format="{{priceFormat}}" bindchange="onPriceInput" t-class-input="input" t-class-label="label" />
       <t-input class="custom-input" label="工程名称" placeholder="请输入工程名称" maxlength="{{30}}" />
       <t-input class="custom-input" label="产品名称" placeholder="请输入工程名称" maxlength="{{30}}" t-input--border="asd"
-        t-input="input" clearable />
+        t-input="input" clearable /> -->
+
+      <eletricity-price id="myComp" />
+
 
       <t-radio-group default-value="0" borderless>
         <t-radio label="单选标题" value="0">
@@ -29,7 +32,6 @@
           </view>
         </t-radio>
 
-
         <!-- 第二个普通 Radio -->
         <label class="custom-radio-item">
           <t-radio value="1" />
@@ -38,15 +40,6 @@
           </view>
         </label>
       </t-radio-group>
-
-
-
-
-
-      <!-- <view slot="note" style="font-size: 16px;">
-          {{projectType.title}}
-        </view> -->
-      <!-- </t-cell> -->
 
       <t-picker visible="{{projectType.visible}}" value="{{projectType.selected}}" data-key="projectType"
         title="{{projectType.title}}" cancelBtn="取消" confirmBtn="确认" usingCustomNavbar bindchange="onPickerChange"
