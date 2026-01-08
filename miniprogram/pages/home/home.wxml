@@ -1,8 +1,10 @@
 <!--pages/home/home.wxml-->
 
 <t-navbar title="高效机房" />
-<image src="http://127.0.0.1:8000/static/images/bg.png" class="bg-image" mode="aspectFill" />
-<t-back-top theme="{{backTopTheme}}"  text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop" visible="false"></t-back-top>
+<!-- <image src="bg.png" class="bg-image" mode="aspectFill" />                                                  -->
+<image src="http://127.0.0.1:8000/static/images/bg1.png" class="bg-image" mode="aspectFill" />
+<t-back-top theme="{{backTopTheme}}" text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop"
+  visible="false"></t-back-top>
 <view class="page-container">
   <view class="search">
     <t-search shape="round" value="{{searchValue}}" placeholder="请输入工程信息" clearable bind:change="onSearchChange"
@@ -52,22 +54,15 @@
     </view>
   </view>
 
-  <scroll-view scroll-y style="height: calc(100vh - 700rpx);"
-  bindscroll="onScroll"
-    scroll-top="{{backToTopScroll}}"
-    scroll-with-animation="true"
-    enhanced="true"
-    bouncetime="300"
-    bindscrolltolower="onLoadMore"
-    bindrefresherrefresh="onPullDownRefresh"
-    refresher-enabled="{{true}}"
-    refresher-triggered="{{refresherTriggered}}"
-    refresher-background="#f6f6f8"
-    refresher-threshold="80">
+  <scroll-view scroll-y style="height: calc(100vh - 700rpx);" bindscroll="onScroll" scroll-top="{{backToTopScroll}}"
+    scroll-with-animation="true" enhanced="true" bouncetime="300" bindscrolltolower="onLoadMore"
+    bindrefresherrefresh="onPullDownRefresh" refresher-enabled="{{true}}" refresher-triggered="{{refresherTriggered}}"
+   refresher-threshold="80">
     <!-- 列表内容 -->
     <view wx:if="{{refresherTriggered}}" class="refresher-loading">
       <t-loading size="40" text="加载中..." />
     </view>
+
     <view class="program-info" hover-class="card-active" wx:for="{{filteredList}}" wx:key="id" data-id="{{item.id}}">
       <view class="info">
         <view style="display: flex; flex-direction: row; height: 70%">
@@ -105,7 +100,10 @@
     </view>
 
     <view class="loading" wx:if="{{loading}}">加载中...</view>
-    <view class="no-data" wx:if="{{!loading && programList.length === 0}}">暂无节目</view>
+    <!-- <view class="no-data" wx:if="{{!loading && programList.length === 0}}"><image class="no-data" src="no data.png" /></view> -->
+    <view class="no-data-container" wx:if="{{!loading && programList.length === 0}}">
+      <image class="no-data-img" src="no data.png" mode="aspectFit" />
+    </view>
 
   </scroll-view>
 
@@ -114,7 +112,8 @@
   <t-button t-class="new-project" theme="primary" bind:tap="onCreateNewProject"> + 新建工程</t-button>
 
 
-  <t-tab-bar class="t-tab-bar" value="{{value}}" default-value="{{0}}" bindchange="onChange" theme="tag" split="{{false}}">
+  <t-tab-bar class="t-tab-bar" value="{{value}}" default-value="{{0}}" bindchange="onChange" theme="tag"
+    split="{{false}}">
     <t-tab-bar-item wx:for="{{tabBarList}}" wx:key="value" value="{{item.value}}" icon="{{item.icon}}">{{item.label}}
     </t-tab-bar-item>
   </t-tab-bar>

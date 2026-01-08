@@ -3,6 +3,35 @@ App<IAppOption>({
   globalData: {},
   onLaunch() {
     // 展示本地存储能力
+    const fontWeights = [
+      { file: 'ExtraLight', weight: '100' },
+      { file: 'Light',      weight: '200' },
+      { file: 'Normal',     weight: '300' },  // 或 Regular → 400
+      { file: 'Regular',    weight: '400' },
+      { file: 'Medium',     weight: '500' },
+      { file: 'Bold',       weight: '700' },
+      { file: 'Heavy',      weight: '900' },
+      // 添加你有的所有权重
+    ];
+
+    fontWeights.forEach(item => {
+      wx.loadFontFace({
+        global: true,  // 全局生效
+        family: 'SourceHanSansSC',
+        source: `url("http://127.0.0.1:8000/static/SimplifiedChinese/SourceHanSansSC-${item.file}.otf")`,
+        desc: {
+          style: 'normal',
+          weight: item.weight  // 关键：对应 CSS font-weight 值
+        },
+        success(res) {
+          console.log(`${item.file} 加载成功`, res);
+        },
+        fail(err) {
+          console.error(`${item.file} 加载失败`, err);
+        }
+      });
+    });
+  
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)

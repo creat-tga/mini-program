@@ -6,6 +6,8 @@
   -webkit-backdrop-filter: blur(10rpx);
   font-size: larger;
   font-weight: 600;
+  font-family: 'SourceHanSansSC';  /* 统一 family */
+
 }
 
 .bg-image {
@@ -99,13 +101,13 @@
 
 
 .program-info {
-  width: 95%;
+  width: 93.3%;
   height: 150px;
   margin: 0 auto 20rpx auto;
   /* 关键：上下外边距 + 左右 auto，实现水平居中 */
   border-radius: 20rpx;
-  background-color: rgba(246, 246, 248, 0.884);
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 1);
+  // box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
 }
 
 .program-info .cover {
@@ -142,8 +144,8 @@
   text-overflow: ellipsis;
   /* 超出显示省略号 */
   font-size: 32rpx;
-  font-weight: 500;
-  color: rgb(56, 112, 209);
+  font-weight: 300;
+  color: rgb(56, 130, 255);
 }
 
 .result {
@@ -170,10 +172,38 @@
   color: #999;
 }
 
+/* 外层容器：整块区域垂直水平居中 */
+.no-data-container {
+  display: flex;
+  flex-direction: column;       // 图片和文字垂直排列
+  justify-content: center;      // 垂直居中
+  align-items: center;          // 水平居中
+  min-height: 100%;            // 至少占满屏幕高度（可根据实际容器调整）
+  padding-bottom: 15%;
+  box-sizing: border-box;
+}
+
+/* 图片：保持原比例，不变形 */
+.no-data-img {
+  width: 400rpx;                // 根据你的设计稿设置固定宽度，或用 max-width
+  height: 400rpx;               // 可以固定高度，也可以不写，让它自适应
+  /* 如果不设 height，配合 mode="aspectFit" 会自动等比缩放 */
+  /* 或者使用 object-fit（小程序基础库 2.25.0+ 支持） */
+  object-fit: contain;          // 推荐：保持比例，不裁剪
+}
+
+/* 可选：文字样式 */
+.no-data-text {
+  margin-top: 40rpx;
+  color: #999;
+  font-size: 32rpx;
+}
+
 .new-project {
   margin: 0;
   margin-top: 50rpx;
   width: 80%;
+  height: 20rpx;
   --td-button-border-radius: 40rpx;
   --td-button-border-width: 0;
   --td-button-font-weight: 100;
