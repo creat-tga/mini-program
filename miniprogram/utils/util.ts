@@ -20,8 +20,8 @@ const formatNumber = (n: number) => {
 
 export const BASE_URL = (() => {
 
-  return 'http://127.0.0.1:8000';  // 测试环境
-  return 'https://1065983258.dpdns.org';  // 正式域名
+  // return 'http://127.0.0.1:8000';  // 测试环境
+  return 'https://1065983258.dpdns.org:8000';  // 正式域名
 
 })();
 

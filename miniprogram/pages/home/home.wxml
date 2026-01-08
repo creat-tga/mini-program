@@ -2,7 +2,7 @@
 
 <t-navbar title="高效机房" />
 <!-- <image src="bg.png" class="bg-image" mode="aspectFill" />                                                  -->
-<image src="http://127.0.0.1:8000/static/images/bg1.png" class="bg-image" mode="aspectFill" />
+<image src="http://127.0.0.1:8000/static/images/bg.png" class="bg-image" mode="aspectFill" />
 <t-back-top theme="{{backTopTheme}}" text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop"
   visible="false"></t-back-top>
 <view class="page-container">
@@ -81,7 +81,8 @@
               </view>
             </view>
           </view>
-          <view style="height:100%; width: 30%; background-color: antiquewhite; position: relative;">
+          <view style="height:100%; width: 30%; position: relative;">
+          <image style="height:100%; width: 80%;" src="grade0.png" mode="aspectFit"></image>
             <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
               style="position: absolute;  top: 5rpx;  right: 20rpx; width: 40rpx;" bind:tap="onShowAction"
               data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}"></t-icon>
