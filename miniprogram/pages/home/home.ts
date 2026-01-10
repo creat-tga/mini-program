@@ -10,7 +10,9 @@ interface ProgramItem {
   coolingCapacity: number,
   COP: number,
   investReturn: number,
-  favorited: number
+  favorited: number,
+  grade: number,
+  score: number
 }
 
 Page({
@@ -167,8 +169,8 @@ Page({
         context: this,
         cancelText: '取消',
         items: [
-          { label: '删除', icon: 'delete', color: '#E34D59'},
-          { label: '取消收藏', icon: 'bookmark-add', color: 'blue'}
+          { label: '删除', icon: 'delete', color: '#E34D59' },
+          { label: '取消收藏', icon: 'bookmark-add', color: 'blue' }
         ],
       });
     }
@@ -176,9 +178,10 @@ Page({
   },
 
   handleSelected(e: any) {
-    if (e.detail.selected === "删除") {
+    console.log(e);
+    if (e.detail.selected.label === "删除") {
       this.deleteItem(this.data.selectedIndex);
-    } else if (e.detail.selected === "收藏" || e.detail.selected === "取消收藏") {
+    } else if (e.detail.selected.label === "收藏" || e.detail.selected.label === "取消收藏") {
       this.toggleFavorite(this.data.selectedIndex);
     }
   },
@@ -333,7 +336,7 @@ Page({
   // 点击新建工程按钮
   onCreateNewProject() {
     wx.navigateTo({
-      url: '/pages/newProject/newProject', 
+      url: '/pages/newProject/newProject',
       success: () => {
         console.log('跳转到新建工程页面成功');
       },
@@ -359,4 +362,22 @@ Page({
     //   }
     // });
   },
+
+  // 编辑工程信息
+  editProgram(){
+    wx.navigateTo({
+      url: '/pages/newProject/newProject',
+      success: () => {
+        console.log('跳转到新建工程页面成功');
+      },
+      fail: (err) => {
+        console.error('跳转失败', err);
+        wx.showToast({
+          title: '页面不存在',
+          icon: 'none'
+        });
+      }
+    });
+  },
+
 })
