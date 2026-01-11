@@ -3,7 +3,7 @@
 <t-navbar title="高效机房" />
 <!-- <image src="bg.png" class="bg-image" mode="aspectFill" />                                                  -->
 <!-- <image src="http://127.0.0.1:8000/static/images/bg.png" class="bg-image" mode="aspectFill" /> -->
-<image src="https://1065983258.dpdns.org:8000/static/images/bg.png" class="bg-image" mode="aspectFill" />
+<image src="https://1065983258.dpdns.org:8000/static/images/bg.png" class="bg-image" mode="aspectFill" binderror="onImageError" />
 
 <t-back-top theme="{{backTopTheme}}" text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop"
   visible="false"></t-back-top>
@@ -94,8 +94,8 @@
             </view>
 
             <!-- 右上角的更多操作图标 -->
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
+            <t-icon name="ellipsis" style="color: blueviolet;" 
+              style="position: absolute; top: 5rpx; right: 20rpx; width: 30%; z-index: 10;" catch:tap="onShowAction"
               data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
             </t-icon>
           </view>

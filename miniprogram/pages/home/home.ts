@@ -34,6 +34,11 @@ Page({
     ]
   },
 
+  onImageError(e:any) {
+    console.error('图片加载失败，原因：', e.detail.errMsg);
+    // 真机调试时，在 vConsole 面板能看到具体报错，比如 "ERR_CERT_AUTHORITY_INVALID"
+  },
+
   // 页面加载时
   onLoad: function () {
     this.loadProgramList();
