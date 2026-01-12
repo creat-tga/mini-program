@@ -84,81 +84,23 @@
             </view>
           </view>
 
-          <view wx:if="{{item.grade === 0}}" style="height:100%; width: 40%; position: relative;">
-            <!-- 数字文本，绝对定位到图片中心 -->
+          <view style="height:100%; width: 40%; position: relative;">
             <view style="height:100%; width: 70%; position: relative;">
-              <text
-                style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 10; font-size: 40rpx; font-weight: 600; color: rgb(75, 95, 220); ">{{item.score}}</text>
-              <!-- 图片 -->
-              <image style="height:100%; width: 100%;" src="grade0.png" mode="aspectFit"></image>
+              <text class="grade-score grade{{item.grade}}">{{item.score}}</text>
+              <image wx:if="{{item.grade === 0}}" style="height:100%; width: 100%;" src="grade0.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === 1}}" style="height:100%; width: 100%;" src="grade1.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === 2}}" style="height:100%; width: 100%;" src="grade2.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === 3}}" style="height:100%; width: 100%;" src="grade3.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === 4}}" style="height:100%; width: 100%;" src="grade4.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === null}}" style="height:100%; width: 100%;" src="gradenull.png" mode="aspectFit"></image>
             </view>
 
             <!-- 右上角的更多操作图标 -->
-            <t-icon name="ellipsis" style="color: blueviolet;" 
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 30%; z-index: 10;" catch:tap="onShowAction"
+            <t-icon name="ellipsis" 
+              style="color: blueviolet;position: absolute; top: 5rpx; right: 20rpx; width: 30%; z-index: 10;" catch:tap="onShowAction"
               data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
             </t-icon>
           </view>
-
-          <view wx:if="{{item.grade === 1}}" style="height:100%; width: 40%; position: relative;">
-            <view style="height:100%; width: 70%; position: relative;">
-              <text
-                style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 10; font-size: 40rpx; font-weight: 600; color: rgb(79, 140, 237); ">{{item.score}}</text>
-              <image style="height:100%; width: 100%;" src="grade1.png" mode="aspectFit"></image>
-            </view>
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
-            </t-icon>
-          </view>
-
-          <view wx:if="{{item.grade === 2}}" style="height:100%; width: 40%; position: relative;">
-            <view style="height:100%; width: 70%; position: relative;">
-              <text
-                style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 10; font-size: 40rpx; font-weight: 600; color: rgb(87, 179, 238); ">{{item.score}}</text>
-              <image style="height:100%; width: 100%;" src="grade2.png" mode="aspectFit"></image>
-            </view>
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
-            </t-icon>
-          </view>
-
-          <view wx:if="{{item.grade === 3}}" style="height:100%; width: 40%; position: relative;">
-            <view style="height:100%; width: 70%; position: relative;">
-              <text
-                style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 10; font-size: 40rpx; font-weight: 600; color: rgb(97, 210, 255); ">{{item.score}}</text>
-              <image style="height:100%; width: 100%;" src="grade3.png" mode="aspectFit"></image>
-            </view>
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
-            </t-icon>
-          </view>
-
-          <view wx:if="{{item.grade === 4}}" style="height:100%; width: 40%; position: relative;">
-            <view style="height:100%; width: 70%; position: relative;">
-              <text
-                style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 10; font-size: 40rpx; font-weight: 600; color: rgb(255, 210, 121); ">{{item.score}}</text>
-              <image style="height:100%; width: 100%;" src="grade4.png" mode="aspectFit"></image>
-            </view>
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
-            </t-icon>
-          </view>
-
-          <view wx:if="{{item.grade === null}}" style="height:100%; width: 40%; position: relative;">
-            <view style="height:100%; width: 70%; position: relative;">
-              <image style="height:100%; width: 100%;" src="gradenull.png" mode="aspectFit"></image>
-            </view>
-            <t-icon name="ellipsis" style="color: blueviolet;" size="40rpx"
-              style="position: absolute; top: 5rpx; right: 20rpx; width: 40rpx; z-index: 10;" bind:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
-            </t-icon>
-          </view>
-
-
         </view>
 
         <t-divider style="border-color: rgb(238, 238, 238); height: 5%;" />

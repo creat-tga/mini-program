@@ -49,7 +49,7 @@ App<IAppOption>({
       global: true,  // 全局生效
       family: 'SourceHanSansSC',
       // source: `url("http://localhost:8000/static/SimplifiedChinese/STXINGKA.TTF")`,
-      source: `url("https://1065983258.dpdns.org/static/STXINGKA.TTF")`, 
+      source: `url("https://1065983258.dpdns.org/static/SourceHanSansSC-VF.otf.woff2")`, 
       // source: `url("https://lf3-static.bytednsdoc.com/obj/eden-cn/89eh7p9v_zlp/ljhwZthlaukjlkulzlp/fonts/SourceHanSansSC-Regular.woff2")`,
       success(res) {
         console.log(`SourceHanSansSC-VF.ttf加载成功`, res);

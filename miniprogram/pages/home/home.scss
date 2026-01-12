@@ -6,7 +6,8 @@
   -webkit-backdrop-filter: blur(10rpx);
   font-size: larger;
   font-weight: 600;
-  font-family: 'SourceHanSansSC';  /* 统一 family */
+  font-family: 'SourceHanSansSC';
+  /* 统一 family */
 
 }
 
@@ -149,6 +150,41 @@
   color: rgb(56, 130, 255);
 }
 
+.grade-score {
+  color: rgb(221, 221, 211);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.grade0 {
+  color: rgb(75, 95, 220);
+}
+
+.grade1 {
+  color: rgb(79, 140, 237);
+}
+
+.grade2 {
+  color: rgb(87, 179, 238);
+}
+
+.grade3 {
+  color: rgb(97, 210, 255);
+}
+
+.grade4 {
+  color: rgb(255, 210, 121);
+}
+
+.gradenull {
+  color: rgb(221, 221, 211);
+}
+
 .result {
   font-size: 25rpx;
   font-weight: 400;
@@ -177,21 +213,21 @@
 /* 外层容器：整块区域垂直水平居中 */
 .no-data-container {
   display: flex;
-  flex-direction: column;       // 图片和文字垂直排列
-  justify-content: center;      // 垂直居中
-  align-items: center;          // 水平居中
-  min-height: 100%;            // 至少占满屏幕高度（可根据实际容器调整）
+  flex-direction: column; // 图片和文字垂直排列
+  justify-content: center; // 垂直居中
+  align-items: center; // 水平居中
+  min-height: 100%; // 至少占满屏幕高度（可根据实际容器调整）
   padding-bottom: 15%;
   box-sizing: border-box;
 }
 
 /* 图片：保持原比例，不变形 */
 .no-data-img {
-  width: 400rpx;                // 根据你的设计稿设置固定宽度，或用 max-width
-  height: 400rpx;               // 可以固定高度，也可以不写，让它自适应
+  width: 400rpx; // 根据你的设计稿设置固定宽度，或用 max-width
+  height: 400rpx; // 可以固定高度，也可以不写，让它自适应
   /* 如果不设 height，配合 mode="aspectFit" 会自动等比缩放 */
   /* 或者使用 object-fit（小程序基础库 2.25.0+ 支持） */
-  object-fit: contain;          // 推荐：保持比例，不裁剪
+  object-fit: contain; // 推荐：保持比例，不裁剪
 }
 
 /* 可选：文字样式 */
@@ -210,9 +246,9 @@
   --td-button-border-radius: 40rpx;
   --td-button-border-width: 0;
   --td-button-font-weight: 100;
-  --td-button-default-color: rgb(187, 199, 207); 
-  --td-button-bg-color: rgb(8,148,250); 
-  --td-button-primary-bg-color: rgb(8,148,250);
+  --td-button-default-color: rgb(187, 199, 207);
+  --td-button-bg-color: rgb(8, 148, 250);
+  --td-button-primary-bg-color: rgb(8, 148, 250);
   --td-button-primary-active-bg-color: #007ad3;
 
 }
