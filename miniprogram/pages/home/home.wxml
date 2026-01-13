@@ -5,8 +5,7 @@
 <!-- <image src="http://127.0.0.1:8000/static/images/bg.png" class="bg-image" mode="aspectFill" /> -->
 <image src="https://1065983258.dpdns.org:8000/static/images/bg.png" class="bg-image" mode="aspectFill" binderror="onImageError" />
 
-<t-back-top theme="{{backTopTheme}}" text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop"
-  visible="false"></t-back-top>
+<t-back-top theme="{{backTopTheme}}" text="{{backTopText}}" scroll-top="{{scrollTop}}" bind:to-top="onToTop" visible="false"></t-back-top>
 <view class="page-container">
   <view class="search">
     <t-search shape="round" value="{{searchValue}}" placeholder="请输入工程信息" clearable bind:change="onSearchChange"
@@ -65,7 +64,8 @@
       <t-loading size="40" text="加载中..." />
     </view>
 
-    <view class="program-info" hover-class="card-active" wx:for="{{filteredList}}" wx:key="id" data-id="{{item.id}}" bind:tap="editProgram">
+    <view class="program-info" hover-class="card-active" wx:for="{{filteredList}}" wx:key="id" data-id="{{item.id}}"
+      bind:tap="editProgram">
       <view class="info">
         <view style="display: flex; flex-direction: row; height: 70%">
           <view style="height: 100%; display:flex; flex-direction: column; width: 60%;">
@@ -87,18 +87,24 @@
           <view style="height:100%; width: 40%; position: relative;">
             <view style="height:100%; width: 70%; position: relative;">
               <text class="grade-score grade{{item.grade}}">{{item.score}}</text>
-              <image wx:if="{{item.grade === 0}}" style="height:100%; width: 100%;" src="grade0.png" mode="aspectFit"></image>
-              <image wx:if="{{item.grade === 1}}" style="height:100%; width: 100%;" src="grade1.png" mode="aspectFit"></image>
-              <image wx:if="{{item.grade === 2}}" style="height:100%; width: 100%;" src="grade2.png" mode="aspectFit"></image>
-              <image wx:if="{{item.grade === 3}}" style="height:100%; width: 100%;" src="grade3.png" mode="aspectFit"></image>
-              <image wx:if="{{item.grade === 4}}" style="height:100%; width: 100%;" src="grade4.png" mode="aspectFit"></image>
-              <image wx:if="{{item.grade === null}}" style="height:100%; width: 100%;" src="gradenull.png" mode="aspectFit"></image>
+              <image wx:if="{{item.grade === 0}}" style="height:100%; width: 100%;" src="grade0.png" mode="aspectFit">
+              </image>
+              <image wx:if="{{item.grade === 1}}" style="height:100%; width: 100%;" src="grade1.png" mode="aspectFit">
+              </image>
+              <image wx:if="{{item.grade === 2}}" style="height:100%; width: 100%;" src="grade2.png" mode="aspectFit">
+              </image>
+              <image wx:if="{{item.grade === 3}}" style="height:100%; width: 100%;" src="grade3.png" mode="aspectFit">
+              </image>
+              <image wx:if="{{item.grade === 4}}" style="height:100%; width: 100%;" src="grade4.png" mode="aspectFit">
+              </image>
+              <image wx:if="{{item.grade === null}}" style="height:100%; width: 100%;" src="gradenull.png"
+                mode="aspectFit"></image>
             </view>
 
             <!-- 右上角的更多操作图标 -->
-            <t-icon name="ellipsis" 
-              style="color: blueviolet;position: absolute; top: 5rpx; right: 20rpx; width: 30%; z-index: 10;" catch:tap="onShowAction"
-              data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
+            <t-icon name="ellipsis"
+              style="color: blueviolet;position: absolute; top: 5rpx; right: 20rpx; width: 30%; z-index: 10;"
+              catch:tap="onShowAction" data-id="{{item.id}}" data-index="{{index}}" data-favorited="{{item.favorited}}">
             </t-icon>
           </view>
         </view>
@@ -128,7 +134,8 @@
   <t-button t-class="new-project" theme="primary" bind:tap="onCreateNewProject"> + 新建工程</t-button>
 
 
-  <t-tab-bar class="t-tab-bar" value="{{value}}" default-value="{{0}}" bindchange="onChange" theme="tag" split="{{false}}">
+  <t-tab-bar class="t-tab-bar" value="{{value}}" default-value="{{0}}" bindchange="onChange" theme="tag"
+    split="{{false}}">
     <t-tab-bar-item wx:for="{{tabBarList}}" wx:key="value" value="{{item.value}}" icon="{{item.icon}}">{{item.label}}
     </t-tab-bar-item>
   </t-tab-bar>

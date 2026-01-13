@@ -45,7 +45,6 @@ Page({
   },
   onChange(e:any) {
     const { value } = e.detail;
-
     this.setData({ current: value });
   },
 

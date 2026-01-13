@@ -1,0 +1,18 @@
+/* components/operateInfo/operateInfo.wxss */
+
+.hour {
+  text-align: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+  background-color: #3582FF;
+  color: #ffffff;
+}
+.hour.selected{
+  background-color: #3582FF;
+  color: #ffffff;
+}
+.hour.unselected{
+  background-color: #f3f3f3;
+  color: #999999;
+}

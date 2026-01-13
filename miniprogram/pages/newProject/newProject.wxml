@@ -1,20 +1,27 @@
-<view class="page">
-  <t-navbar class="block" title="新建工程" fixed="{{false}}" left-arrow bind:go-back="handleBack" />
-  <view class="project-info">
-    <view
+<t-navbar title="新建工程" left-arrow bind:go-back="handleBack" />
+
+<!-- 考虑采用弹性盒子布局
+这里设置一下最大和最小的宽度应该就能满足需求了
+第一次尝试动态响应
+ -->
+<scroll-view class="project-info" scroll-y >
+  <view class="card-container">
+    <view style="width: 95%; height: auto; background-color: white; border-radius: 15rpx; align-items: center; "> 
+      <operate-info></operate-info>    
+    </view>
+    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+  </view>
+</scroll-view>
+
+  <!-- <view
       style="margin-top:20rpx; padding-bottom:20rpx; width: 95%; height: auto; background-color: white; border-radius: 50rpx; ">
       <view style="padding-left: 32rpx; padding-top: 30rpx; font-weight: 600; ">基本信息</view>
       <t-input class="custom-class" label="工程名称" placeholder="请输入工程名称" maxlength="{{30}}" />
       <t-cell class="custom-cell" title="工程类型" arrow hover note="请选择工程类型" t-class-title="tittle" t-class-center="center"
         t-class-note="note" data-key="projectType" bind:click="onTitlePicker" />
-      <!-- <t-input class="custom-input" label="设计负荷" placeholder="请输入设计负荷" suffix="kW" maxlength="{{30}}" type="number"
-        format="{{priceFormat}}" bindchange="onPriceInput" t-class-input="input" t-class-label="label" />
-      <t-input class="custom-input" label="工程名称" placeholder="请输入工程名称" maxlength="{{30}}" />
-      <t-input class="custom-input" label="产品名称" placeholder="请输入工程名称" maxlength="{{30}}" t-input--border="asd"
-        t-input="input" clearable /> -->
-
       <eletricity-price id="myComp" />
-
 
       <t-radio-group default-value="0" borderless>
         <t-radio label="单选标题" value="0">
@@ -32,7 +39,6 @@
           </view>
         </t-radio>
 
-        <!-- 第二个普通 Radio -->
         <label class="custom-radio-item">
           <t-radio value="1" />
           <view class="custom-content">
@@ -46,11 +52,4 @@
         bindpick="onColumnChange" bindcancel="onPickerCancel">
         <t-picker-item options="{{projectType.options}}"></t-picker-item>
       </t-picker>
-
-
-
-    </view>
-    <view style="margin-top:20rpx; width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; "> </view>
-
-  </view>
-</view>
+    </view> -->

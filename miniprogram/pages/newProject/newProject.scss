@@ -1,11 +1,11 @@
 /* pages/newProject/newProject.wxss */
 
-.page {
-  height: 100vh;
-  /* 关键：页面占满视口高度 */
-  display: flex;
-  flex-direction: column;
-}
+// .page {
+//   height: 100vh;
+//   /* 关键：页面占满视口高度 */
+//   display: flex;
+//   flex-direction: column;
+// }
 
 .t-navbar {
   --td-navbar-background: transparent;
@@ -17,12 +17,20 @@
 
 .project-info {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background-color: rgba(243, 243, 243, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* 横向（水平）居中 */
+  justify-content: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;    /* 垂直排列 */
+  align-items: center;       /* 横向居中 */
+  gap: 20rpx;                /* 卡片之间的纵向间距，取代 margin-top */
+  padding: 20rpx 0;          /* 上下留白 */
 }
 
 

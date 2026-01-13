@@ -369,7 +369,8 @@ Page({
   },
 
   // 编辑工程信息
-  editProgram(){
+  editProgram(e){
+    console.log(e);
     wx.navigateTo({
       url: '/pages/newProject/newProject',
       success: () => {
