@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "move-select": "/components/moveSelect/moveSelect",
+    "monthDay-select": "/components/monthDaySelect/monthDaySelect"
+  }
 }

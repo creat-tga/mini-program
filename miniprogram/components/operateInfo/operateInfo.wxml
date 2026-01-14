@@ -2,19 +2,30 @@
 <text style="font-weight: 600; color: #333333;">运行信息</text>
 <view>
   <text>运行日期</text>
-  <view>...待补充内容</view>
+  <monthDay-select elements="{{date}}" id="week"></monthDay-select>
 </view>
 <view>
   <text style="font-weight: 400; color: #333333;">运行星期</text>
-  <view>...待补充内容</view>
+  <move-select elements="{{week}}" id="week"></move-select>
 </view>
-
-
 <view>
-  <text  style="font-weight: 400; color: #333333; ">运行时刻</text>
-  <view style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5rpx; " bind:touchstart="onTouchStart"
-    bind:touchmove="onTouchMove"
-    bind:touchend="onTouchEnd">
-    <view wx:for="{{hours}}" class="hour {{item.select?'selected':'unselected'}}" bind:tap="onTapItem" wx:key="id" id="{{item.id}}" data-id="{{item.id}}"> {{item.id}} </view>
-  </view>
+  <text style="font-weight: 400; color: #333333;">运行时刻</text>
+  <move-select elements="{{hour}}" id="hour"></move-select>
 </view>
+<button bind:tap="submit">提交</button>
+
+<!-- <view>
+  <text style="font-weight: 400; color: #333333; ">运行时刻</text>
+  <view style="display: flex; flex-direction: row; flex-wrap: wrap;" catch:touchstart="onTouchStart"
+  catch:touchmove="onTouchMove"
+  catch:touchend="onTouchEnd">
+    <view wx:for="{{hours}}" 
+          class="hour-wrapper" 
+          catch:tap="onTapItem" 
+          wx:key="id" 
+          id="{{item.id}}" 
+          data-id="{{item.id}}">
+      <view class="hour-inner {{item.select?'selected':'unselected'}}">{{item.id}}</view>
+    </view>
+  </view>
+</view> -->

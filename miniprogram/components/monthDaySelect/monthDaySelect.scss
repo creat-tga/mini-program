@@ -1,0 +1,19 @@
+/* components/monthDaySelect/monthDaySelect.wxss */
+.container {
+  padding: 32rpx;
+}
+
+.demo-area {
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.selected-text {
+  padding: 32rpx 28rpx;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333;
+}

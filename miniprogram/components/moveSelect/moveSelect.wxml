@@ -1,0 +1,6 @@
+<!--components/moveSelecte/moveSelecte.wxml-->
+<view style="display: flex; flex-direction: row; flex-wrap: wrap;" catch:touchstart="onTouchStart"  catch:touchmove="onTouchMove" catch:touchend="onTouchEnd">
+    <view wx:for="{{elements}}" class="element-wrapper" catch:tap="onTapItem" wx:key="id" id="{{item.id}}" data-id="{{item.id}}">
+      <view class="element-inner {{item.select?'selected':'unselected'}}">{{item.label}}</view>
+    </view>
+  </view>

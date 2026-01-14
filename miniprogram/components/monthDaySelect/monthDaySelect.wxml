@@ -1,0 +1,24 @@
+<!--components/monthDaySelect/monthDaySelect.wxml-->
+<view class="container">
+  <view class="demo-area">
+    <view class="selected-text" bind:tap="showPicker">
+      {{selectedText || '请选择月日'}}
+      <t-icon name="arrow-right" size="24rpx" />
+    </view>
+
+    <t-popup visible="{{visible}}" usingCustomNavbar bind:visible-change="onClose" placement="bottom"
+    style="width: 100vw;
+  height: 240px;
+  background: var(--td-bg-color-container);
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;"
+    >
+      <t-picker title="选择月份日期" bind:cancel="onCancel" bind:confirm="onConfirm" bind:change="onChange">
+        <t-picker-item options="{{monthOptions}}" default-value="{{currentMonthIndex}}" value-key="label"
+          bind:change="onMonthChange" />
+        <t-picker-item options="{{dayOptions}}" default-value="{{currentDayIndex}}" value-key="label"
+          bind:change="onDayChange" />
+      </t-picker>
+    </t-popup>
+  </view>
+</view>
