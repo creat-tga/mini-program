@@ -1,20 +1,16 @@
 // components/operateInfo/operateInfo.ts
 Component({
 
-  /**
-   * 组件的属性列表
-   */
   properties: {
 
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
-    date:{
-      startDate: {month: 5, day: 0},
-      endDate: {month: 8, day: 30}
+    date: {
+      startDate: '06-01',
+      endDate: '09-30',
+      temperature: 7.0,
+      type: "fixed"
     },
     week: [
       { id: 0, label: "一", select: true },
@@ -109,84 +105,94 @@ Component({
     isSelecting: false
   },
   lifetimes: {
-    created() {
-      this.getElementsRect();
-    },
-    ready() {
-      this.getElementsRect();
-    },
   },
   methods: {
     submit() {
-      const dateData = null;
+      const dateData = { startDate: this.selectComponent('#date').data.startValue, endDate: this.selectComponent('#date').data.endValue }
       const weekData = this.selectComponent('#week').data.elements;
       const hourData = this.selectComponent('#hour').data.elements;
-
-      console.log('最终提交的星期：', dateData, weekData, hourData);
+      console.log('最终提交的运行时间：', dateData, weekData, hourData);
       wx.showToast({ title: '提交成功' })
     },
-    getElementsRect() {
-      const query = this.createSelectorQuery().in(this);
-      query.selectAll('.hour-wrapper').boundingClientRect(rects => {
-        this.setData({
-          elementsRects: rects
-        })
-      }).exec();
-    },
-    onTouchStart(e: any) {
-      console.log("e_start", e.target.id);
-      this.getElementsRect();
-      // const { clientX, clientY } = e.touches[0];
-      // const selectedID = this.findTargetId(clientX, clientY); // getElementsRect方法本质上是异步的
-      if (!e.target.id) return;
-      const selectedID = e.target.id;
-      if (selectedID !== -1) {
-        this.setData({
-          isSelecting: true,
-          startID: selectedID,
-          endID: selectedID
-        });
-        wx.vibrateShort({ type: 'light' });
-        this.updateHoursState();
+    // 1. 实时输入处理：限制格式、小数位、最大值
+    handleInput(e) {
+      let { value } = e.detail;
+
+      // ---------------------------------------
+      // 第一步：正则清洗，只保留数字和小数点
+      // ---------------------------------------
+      value = value.replace(/[^\d.]/g, ''); // 去除非数字和非点
+
+      // ---------------------------------------
+      // 第二步：处理小数点（保证只有一个，且最多一位小数）
+      // ---------------------------------------
+      // 如果有多个小数点，只保留第一个
+      const dotIndex = value.indexOf('.');
+      if (dotIndex !== -1) {
+        // 截取到小数点后一位：整数部分 + . + 小数第一位
+        const integerPart = value.substring(0, dotIndex);
+        const decimalPart = value.substring(dotIndex + 1);
+
+        // 移除多余的小数点，并限制小数位数为1
+        let newDecimal = decimalPart.replace(/\./g, '').substring(0, 1);
+        value = `${integerPart}.${newDecimal}`;
       }
-    },
-    onTouchMove(e: any) {
-      if (!this.data.isSelecting) return;
-      const { clientX, clientY } = e.touches[0];
-      const selectedID = this.findTargetId(clientX, clientY);
-      if (selectedID !== -1 && selectedID !== this.data.endID) {
-        this.setData({ endID: selectedID });
-        wx.vibrateShort({ type: 'light' });
-        this.updateHoursState();
+
+      // ---------------------------------------
+      // 第三步：处理前导 0 (例如 00 -> 0, 05 -> 5)
+      // ---------------------------------------
+      if (value.length > 1 && value.startsWith('0') && value[1] !== '.') {
+        value = parseFloat(value).toString();
       }
-    },
-    onTouchEnd() {
-      console.log("e_end");
-      if (!this.data.isSelecting) return;
-      this.setData({ isSelecting: false });
-      this.setData({ hoursOrigin: this.data.hours, startID: -1, endID: -1 });
-    },
-    // 查找逻辑
-    findTargetId(x: number, y: number) {
-      const rects = this.data.elementsRects;
-      const target = rects.find(rect =>
-        x >= rect.left && x <= rect.right &&
-        y >= rect.top && y <= rect.bottom
-      );
-      return target ? target.dataset.id : -1;
-    },
-    // 更新逻辑
-    updateHoursState() {
-      const hours = [...this.data.hoursOrigin];
-      const min = Math.min(this.data.startID, this.data.endID);
-      const max = Math.max(this.data.startID, this.data.endID);
-      const newHours = hours.map(item => {
-        if (item.id >= min && item.id <= max) {
-          return { ...item, select: !item.select };
+
+      // ---------------------------------------
+      // 第四步：数值范围限制 (最大值 40)
+      // ---------------------------------------
+      const num = parseFloat(value);
+      if (!isNaN(num)) {
+        if (num > 40) {
+          value = '40'; // 超过40强制变为40
+          // 如果原本是 40.x 这种情况，也归为 40
         }
-        return item;
+      }
+
+      // 更新视图
+      this.setData({
+        temperature: value
       });
-      this.setData({ hours: newHours });
-    }
+    },
+
+    // 2. 失焦处理：处理最小值 (0, 40] -> 必须大于 0
+    handleBlur(e) {
+      let { value } = e.detail;
+      const num = parseFloat(value);
+
+      // 如果为空，不做处理
+      if (!value) return;
+
+      // 逻辑：区间是 (0, 40]，所以 0 是无效的
+      if (isNaN(num) || num <= 0) {
+        wx.showToast({
+          title: '数值必须大于0',
+          icon: 'none'
+        });
+        // 策略：清空或者重置为最小值 0.1
+        this.setData({ temperature: '' });
+        return;
+      }
+
+      // 优化：如果用户输入了 "3." 这种以点结尾的，自动去掉点
+      if (value.endsWith('.')) {
+        this.setData({
+          temperature: value.replace('.', '')
+        });
+      }
+    },
+    onChange(e) {
+      const { value } = e.detail;
+      console.log('用户选择了:', value);
+      this.setData({ type: value });
+    },
+
   }
 })

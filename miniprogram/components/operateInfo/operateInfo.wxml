@@ -1,18 +1,80 @@
 <!--components/operateInfo/operateInfo.wxml-->
-<text style="font-weight: 600; color: #333333;">运行信息</text>
-<view>
-  <text>运行日期</text>
-  <monthDay-select elements="{{date}}" id="week"></monthDay-select>
+<view style="display: flex; flex-direction: column;">
+  <text style="font-weight: 600; color: #333333;">运行信息</text>
+  <t-divider></t-divider>
+  <view>
+    <view style="display: flex; flex-direction: row; width: 100%; justify-content: center; align-content: center;">
+      <text style="width: 6rem;">运行日期</text>
+      <monthDay-select style="width: calc(100%);" defaultStart="{{date.startDate}}" defaultEnd="{{date.endDate}}"
+        id="date"></monthDay-select>
+    </view>
+    <t-divider></t-divider>
+  </view>
+
+  <view>
+    <text style="font-weight: 400; color: #333333;">运行星期</text>
+    <move-select elements="{{week}}" id="week"></move-select>
+  </view>
+  <t-divider></t-divider>
+  <view>
+    <text style="font-weight: 400; color: #333333;">运行时刻</text>
+    <move-select elements="{{hour}}" id="hour"></move-select>
+  </view>
+  <t-divider></t-divider>
+  <button bind:tap="submit">提交</button>
+
 </view>
-<view>
-  <text style="font-weight: 400; color: #333333;">运行星期</text>
-  <move-select elements="{{week}}" id="week"></move-select>
+
+<view style="display: flex; flex-direction: column;">
+  <text style="font-weight: 600; color: #333333;">冷冻侧运行策略</text>
+  <t-divider></t-divider>
+  <view>
+    <view style="display: flex; flex-direction: row; width: 100%; justify-content: center; align-content: center;">
+      <text style="width: 6rem;">供水温度</text>
+      <view style="width: 100%;">
+        <t-input value="{{temperature}}" placeholder="请输入" type="digit" borderless="{{true}}" suffix="℃" align="center"
+          bind:change="handleInput" bind:blur="handleBlur" t-class="no-padding-input" />
+      </view>
+    </view>
+    <t-divider></t-divider>
+  </view>
+
+  <view>
+    <view style="display: flex; flex-direction: row; width: 100%; justify-content: center; align-content: center;">
+      <text style="width: 6rem;">定变频</text>
+      <view style="width: 100%;">
+        <t-radio-group value="{{type}}" bind:change="onChange" borderless t-class="dispersed-box">
+          <!-- 
+      icon="dot" : 选中样式变为圆点
+      t-class="compact-radio" : 去除 padding
+  -->
+          <t-radio value="fixed" label="定频" icon="dot" t-class="compact-radio" />
+
+          <t-radio value="variable" label="变频" icon="dot" t-class="compact-radio" />
+        </t-radio-group>
+      </view>
+    </view>
+    <t-divider></t-divider>
+    <view>
+      <text style="font-weight: 400; color: #333333;">变频范围</text>
+    </view>
+    <t-divider></t-divider>
+
+    <view>
+      <text style="font-weight: 400; color: #333333;">频率</text>
+    </view>
+    <t-divider></t-divider>
+
+    <view>
+      <text style="font-weight: 400; color: #333333;">回水温度</text>
+    </view>
+    <t-divider></t-divider>
+    <button bind:tap="submit">提交</button>
+
+  </view>
 </view>
-<view>
-  <text style="font-weight: 400; color: #333333;">运行时刻</text>
-  <move-select elements="{{hour}}" id="hour"></move-select>
-</view>
-<button bind:tap="submit">提交</button>
+
+
 
 <!-- <view>
   <text style="font-weight: 400; color: #333333; ">运行时刻</text>

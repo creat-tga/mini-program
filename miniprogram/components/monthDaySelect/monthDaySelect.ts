@@ -1,139 +1,144 @@
 // components/monthDaySelect/monthDaySelect.ts
+// components/monthDaySelect/monthDaySelect.ts
+const MONTHS = Array.from({ length: 12 }, (_, i) => ({ label: `${i + 1}月`, value: String(i + 1).padStart(2, '0') }));
+
 Component({
-
-  /**
-   * 组件的属性列表
-   */
   properties: {
-
-  },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {
-    visible: false,
-    selectedText: '',           // 显示给用户看的最终结果
-    currentValue: null,         // 内部保存 {month, day}
-
-    currentMonthIndex: 0,
-    currentDayIndex: 0,
-
-    monthOptions: [],
-    dayOptions: []
-  },
-  lifetimes: {
-    ready() {
-      this.initOptions();
+    defaultStart: {
+      type: String,
+      value: '06-01' 
+    },
+    defaultEnd: {
+      type: String,
+      value: '09-30'
     }
   },
 
-  /**
-   * 组件的方法列表
-   */
+  data: {
+    visible: false,
+    pickerTitle: '',
+    currentType: '', 
+    
+    months: MONTHS,
+    days: [], 
+
+    startDisplay: '', 
+    endDisplay: '',
+    
+    startValue: '',   
+    endValue: '',     
+
+    pickerValue: [], 
+  },
+
+  lifetimes: {
+    attached() {
+      this.initDefaults();
+    }
+  },
+
   methods: {
-    onLoad() {
-      this.initOptions();
-    },
-    // 初始化月份选项（1~12月）
-    initOptions() {
-      const months = Array.from({ length: 12 }, (_, i) => ({
-        value: i + 1,
-        label: `${i + 1}月`
-      }));
+    initDefaults() {
+      const { defaultStart, defaultEnd } = this.properties;
 
-      this.setData({
-        monthOptions: months
-      });
-
-      // 默认选中当前月
-      const now = new Date();
-      const currentMonth = now.getMonth(); // 0-11
-      this.setData({
-        currentMonthIndex: currentMonth
-      });
-
-      this.updateDays(currentMonth + 1);
-    },
-
-    // 根据月份更新天数选项
-    updateDays(month) {
-      const year = new Date().getFullYear(); // 用当前年判断闰年
-      const daysInMonth = new Date(year, month, 0).getDate();
-
-      const days = Array.from({ length: daysInMonth }, (_, i) => ({
-        value: i + 1,
-        label: `${i + 1}日`
-      }));
-
-      this.setData({
-        dayOptions: days
-      });
-
-      // 如果当前选中的天数超过该月天数，自动调整到最后一天
-      const currentDayIndex = this.data.currentDayIndex;
-      if (currentDayIndex >= days.length) {
+      if (defaultStart) {
         this.setData({
-          currentDayIndex: days.length - 1
+          startValue: defaultStart,
+          startDisplay: this.formatDateToDisplay(defaultStart)
+        });
+      }
+
+      if (defaultEnd) {
+        this.setData({
+          endValue: defaultEnd,
+          endDisplay: this.formatDateToDisplay(defaultEnd)
         });
       }
     },
 
-    // 月份变更 → 更新天数列
-    onMonthChange(e) {
-      const monthIndex = e.detail.value;
-      const month = this.data.monthOptions[monthIndex].value;
+    formatDateToDisplay(dateStr: string) {
+      if (!dateStr) return '';
+      const [m, d] = dateStr.split('-');
+      return `${parseInt(m, 10)}月${parseInt(d, 10)}日`;
+    },
+
+    getDaysByMonth(month: string) {
+      const m = parseInt(month, 10);
+      // 简单处理非闰年，如果需要严谨逻辑可引入 dayjs 或判断年份
+      const daysMap = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      const count = daysMap[m];
+      
+      return Array.from({ length: count }, (_, i) => ({
+        label: `${i + 1}日`,
+        value: String(i + 1).padStart(2, '0')
+      }));
+    },
+
+    updateDays(monthValue: string) {
+      const days = this.getDaysByMonth(monthValue);
+      this.setData({ days });
+    },
+
+    openPicker(type: 'start' | 'end') {
+      const isStart = type === 'start';
+      const currentValue = isStart ? this.data.startValue : this.data.endValue;
+      
+      let pickerValue = ['06', '01']; 
+
+      if (currentValue) {
+        const [m, d] = currentValue.split('-');
+        this.updateDays(m);
+        pickerValue = [m, d];
+      } else {
+        this.updateDays('06');
+      }
 
       this.setData({
-        currentMonthIndex: monthIndex
-      });
-
-      this.updateDays(month);
-    },
-
-    // 天数变更
-    onDayChange(e) {
-      this.setData({
-        currentDayIndex: e.detail.value
+        visible: true,
+        currentType: type,
+        pickerTitle: isStart ? '选择开始日期' : '选择结束日期',
+        pickerValue: pickerValue
       });
     },
 
-    // 打开选择器
-    showPicker() {
-      console.log("打开成功")
-      this.setData({ visible: true });
+    onOpenStart() { this.openPicker('start'); },
+    onOpenEnd() { this.openPicker('end'); },
+    onClose() { this.setData({ visible: false }); },
+
+    onColumnChange(e: any) {
+      const { column, value } = e.detail;
+      if (column === 0) {
+        // TDesign 的 picker value 可能是对象或数组，这里假设 value 是选中的值数组
+        // 注意：bindpick 返回的 value 可能是选中的索引或值，具体视 TDesign 版本而定
+        // 如果 value 是值：
+        this.updateDays(value[0]);
+      }
     },
 
-    onClose() {
-      this.setData({ visible: false });
-    },
+    onConfirm(e: any) {
+      const { value, label } = e.detail; 
+      const dateStr = `${value[0]}-${value[1]}`;
+      const displayStr = `${label[0]}${label[1]}`;
+      const { currentType, startValue, endValue } = this.data;
 
-    onCancel() {
-      this.setData({ visible: false });
-    },
+      if (currentType === 'start') {
+        if (endValue && dateStr > endValue) {
+          wx.showToast({ title: '开始日期不能晚于结束日期', icon: 'none' });
+          return;
+        }
+        this.setData({ startValue: dateStr, startDisplay: displayStr, visible: false });
+      } else {
+        if (startValue && dateStr < startValue) {
+          wx.showToast({ title: '结束日期不能早于开始日期', icon: 'none' });
+          return;
+        }
+        this.setData({ endValue: dateStr, endDisplay: displayStr, visible: false });
+      }
 
-    // 确认选择
-    onConfirm() {
-      const { monthOptions, dayOptions, currentMonthIndex, currentDayIndex } = this.data;
-
-      const month = monthOptions[currentMonthIndex].value;
-      const day = dayOptions[currentDayIndex].value;
-
-      const text = `${month.toString().padStart(2, '0')}月${day.toString().padStart(2, '0')}日`;
-
-      this.setData({
-        visible: false,
-        selectedText: text,
-        currentValue: { month, day }
+      this.triggerEvent('change', {
+        startDate: currentType === 'start' ? dateStr : startValue,
+        endDate: currentType === 'end' ? dateStr : endValue
       });
-
-      // 你也可以在这里把结果抛出去，比如 triggerEvent
-      // this.triggerEvent('change', { month, day, text });
-    },
-
-    // 可选：实时变更时也可以更新显示（看需求）
-    onChange(e) {
-      // 如果想要实时更新显示，可以在这里处理
     }
   }
-})
+});

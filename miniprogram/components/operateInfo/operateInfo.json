@@ -2,6 +2,10 @@
   "component": true,
   "usingComponents": {
     "move-select": "/components/moveSelect/moveSelect",
-    "monthDay-select": "/components/monthDaySelect/monthDaySelect"
+    "monthDay-select": "/components/monthDaySelect/monthDaySelect",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-radio": "tdesign-miniprogram/radio/radio",
+    "t-radio-group": "tdesign-miniprogram/radio-group/radio-group"
   }
 }

@@ -1,19 +1,33 @@
 /* components/monthDaySelect/monthDaySelect.wxss */
-.container {
-  padding: 32rpx;
+
+/* components/monthDaySelect/monthDaySelect.wxss */
+.date-range-picker {
+  background-color: rgba(0, 0, 0, 0);
+  // padding: 24rpx 32rpx; /* 根据你的设计稿调整内边距 */
 }
 
-.demo-area {
-  background: #fff;
-  border-radius: 16rpx;
-  overflow: hidden;
-}
-
-.selected-text {
-  padding: 32rpx 28rpx;
-  font-size: 32rpx;
+.picker-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* 或者 center，看你想要两端对齐还是居中 */
+}
+
+.date-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
   color: #333;
+  /* 增加点击区域的高度，提升体验 */
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.date-item.placeholder {
+  color: #bbb; /* 未选择时的颜色 */
+}
+
+.separator {
+  margin: 0 20rpx;
+  color: #666;
+  font-size: 28rpx;
 }

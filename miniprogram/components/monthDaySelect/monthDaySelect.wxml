@@ -1,24 +1,26 @@
 <!--components/monthDaySelect/monthDaySelect.wxml-->
-<view class="container">
-  <view class="demo-area">
-    <view class="selected-text" bind:tap="showPicker">
-      {{selectedText || '请选择月日'}}
-      <t-icon name="arrow-right" size="24rpx" />
+<view class="date-range-picker">
+  <view class="picker-row">
+    <view class="date-item {{!startDisplay ? 'placeholder' : ''}}" bind:tap="onOpenStart">
+      {{startDisplay || '开始日期'}}
     </view>
-
-    <t-popup visible="{{visible}}" usingCustomNavbar bind:visible-change="onClose" placement="bottom"
-    style="width: 100vw;
-  height: 240px;
-  background: var(--td-bg-color-container);
-  border-top-left-radius: 16rpx;
-  border-top-right-radius: 16rpx;"
-    >
-      <t-picker title="选择月份日期" bind:cancel="onCancel" bind:confirm="onConfirm" bind:change="onChange">
-        <t-picker-item options="{{monthOptions}}" default-value="{{currentMonthIndex}}" value-key="label"
-          bind:change="onMonthChange" />
-        <t-picker-item options="{{dayOptions}}" default-value="{{currentDayIndex}}" value-key="label"
-          bind:change="onDayChange" />
-      </t-picker>
-    </t-popup>
+    <view class="separator">至</view>
+    <view class="date-item {{!endDisplay ? 'placeholder' : ''}}" bind:tap="onOpenEnd">
+      {{endDisplay || '结束日期'}}
+    </view>
   </view>
+
+  <t-picker
+    visible="{{visible}}"
+    value="{{pickerValue}}"
+    title="{{pickerTitle}}"
+    cancelBtn="取消"
+    confirmBtn="确定"
+    bindchange="onConfirm"
+    bindpick="onColumnChange"
+    bindcancel="onClose"
+  >
+    <t-picker-item options="{{months}}" />
+    <t-picker-item options="{{days}}" />
+  </t-picker>
 </view>

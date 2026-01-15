@@ -1,38 +1,30 @@
 /* components/operateInfo/operateInfo.wxss */
-.hour-wrapper {
-  width: 3rem; 
-  height: 3rem;
-  padding: 0.5rem; /* 这里用 padding 代替原本的 margin 效果 */
-  box-sizing: border-box; /* 确保 padding 包含在宽高内 */
-  /* 调试时可以打开下面这个背景色看看，它们应该是无缝拼接的 */
-  // background-color: rgba(255, 0, 0, 0.1);
+.t-input::after {
+  border-bottom: none !important;
+}
+/* 去除组件整体的内边距 */
+.no-padding-input {
+  padding: 0 !important;
+}
+/* 1. Group 容器：横向分散排列 */
+.dispersed-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; /* 关键：两端对齐（分散） */
+  width: 100%; /* 确保容器占满宽度，才能看到分散效果 */
 }
 
-/* 内层元素：负责具体的样式 */
-.hour-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
-  display: flex;        /* 文字居中 */
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;    /* 稍微调整字体大小以适应 */
-  pointer-events: none; 
-  transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.hour-inner.selected {
-  background-color: #3582FF;
-  color: #ffffff;
-  /* 选中时稍微放大一点点，产生强调感 */
-  /* 或者稍微缩小一点点(0.95)，产生按压感，看你个人喜好 */
-  transform: scale(1.05); 
-  box-shadow: 0 4rpx 10rpx rgba(53, 130, 255, 0.3); /* 加一点阴影增加立体感 */
-}
-
-.hour-inner.unselected {
-  background-color: #f3f3f3;
-  color: #999999;
-  transform: scale(1); /* 恢复原状 */
-  box-shadow: none;
+/* 2. 单个 Radio：去除 Padding，保持紧凑 */
+.compact-radio {
+  /* 重置 TDesign 默认内边距 */
+  --td-radio-vertical-padding: 0;
+  --td-radio-horizontal-padding: 0;
+  
+  /* 去除背景色 */
+  background: transparent;
+  
+  /* 
+     如果是左右两端对齐，建议不要设置 margin-right 
+     如果是均分排列（每个占50%），可以在这里加 flex: 1 
+  */
 }

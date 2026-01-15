@@ -6,12 +6,12 @@
  -->
 <scroll-view class="project-info" scroll-y >
   <view class="card-container">
-    <view style="width: 95%; height: auto; background-color: white; border-radius: 15rpx; align-items: center; "> 
+    <view style="width: 90%; height: auto; padding: 2.5%; background-color: white; border-radius: 15rpx; align-items: center; "> 
       <operate-info></operate-info>    
     </view>
-    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
-    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
-    <view style="width: 95%; height: 14rem; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+    <view style="width: 90%; height: 14rem; padding: 2.5%; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+    <view style="width: 90%; height: 14rem; padding: 2.5%; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
+    <view style="width: 90%; height: 14rem; padding: 2.5%; background-color: white; border-radius: 15rpx; align-items: center;"> </view>
   </view>
 </scroll-view>
 
